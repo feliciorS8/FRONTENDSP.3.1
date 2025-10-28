@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Penjualan Komputer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🖥️ Aplikasi Penjualan Komputer</h1>
+
+    <!-- Kategori Section -->
+    <div class="kategori-section">
+      <h3>KATEGORI</h3>
+      <div class="kategori-buttons">
+        <button class="kategori-btn" onclick="openPopup('pc-laptop')">PC / LAPTOP</button>
+        <button class="kategori-btn" onclick="openPopup('aksesoris')">AKSESORIS</button>
+        <button class="kategori-btn" onclick="openPopup('surat')">SURAT PENJUALAN</button>
+      </div>
+    </div>
+
+    <!-- Form Data Barang -->
+    <div class="form-section">
+      <h3>Data Barang</h3>
+      <div class="form-group">
+        <label>Kategori :</label>
+        <select id="kategori">
+          <option value="">-- Pilih Kategori --</option>
+          <option value="PC / LAPTOP">PC / LAPTOP</option>
+          <option value="AKSESORIS">AKSESORIS</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Nama Barang :</label>
+        <input type="text" id="namaBarang" placeholder="Masukkan nama barang">
+      </div>
+      <div class="form-group">
+        <label>Harga Satuan :</label>
+        <input type="number" id="hargaSatuan" placeholder="Masukkan harga satuan" value="0">
+      </div>
+      <div class="form-group">
+        <label>Jumlah :</label>
+        <input type="number" id="jumlah" placeholder="Masukkan jumlah" value="1" min="1">
+      </div>
+      <button class="button-simpan" onclick="hitungTotal()">HITUNG</button>
+    </div>
+
+    <!-- Form Jenis Penjualan -->
+    <div class="form-section">
+      <h3>Jenis Penjualan</h3>
+      <div class="form-group">
+        <label>Jenis Penjualan :</label>
+        <select id="jenisPenjualan" onchange="hitungTotal()">
+          <option value="">-- Pilih Jenis --</option>
+          <option value="tunai">Tunai</option>
+          <option value="kredit">Kredit</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Hasil Perhitungan -->
+    <div class="hasil-section">
+      <h3>Hasil Perhitungan</h3>
+      <div class="hasil-group">
+        <label>Total Penjualan :</label>
+        <div class="nilai" id="totalPenjualan">Rp. 0</div>
+      </div>
+      <div class="hasil-group">
+        <label>Diskon :</label>
+        <div class="nilai" id="diskon">Rp. 0</div>
+      </div>
+      <div class="hasil-group">
+        <label>Pajak :</label>
+        <div class="nilai" id="pajak">Rp. 0</div>
+      </div>
+      <div class="hasil-group total">
+        <label>Harga Total :</label>
+        <div class="nilai" id="hargaTotal">Rp. 0</div>
+      </div>
+    </div>
+
+    <!-- Ketentuan -->
+    <div class="ketentuan">
+      <h4>Ketentuan :</h4>
+      <ul>
+        <li>Diskon diberikan sebesar 10% dari total penjualan jika penjualan dilakukan secara tunai</li>
+        <li>Pajak diberikan dengan ketentuan : - 15% dari harga satuan untuk Barang Utama - 10% dari harga satuan untuk Barang Aksesoris</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Popup PC/Laptop -->
+  <div id="popupPCLaptop" class="popup">
+    <div class="popup-content">
+      <div class="popup-header pc-laptop">
+        <span class="close" onclick="closePopup('popupPCLaptop')">&times;</span>
+        <h2>PC / LAPTOP</h2>
+      </div>
+      <div class="popup-body">
+        <ul class="item-list">
+          <li onclick="pilihBarang('PC IBM Core i7', 5000000, 'PC / LAPTOP')">
+            <span class="item-name">PC IBM Core i7</span>
+            <span class="item-price">Rp. 5.000.000</span>
+          </li>
+          <li onclick="pilihBarang('Laptop Asus Core i5', 8000000, 'PC / LAPTOP')">
+            <span class="item-name">Laptop Asus Core i5</span>
+            <span class="item-price">Rp. 8.000.000</span>
+          </li>
+          <li onclick="pilihBarang('Laptop Lenovo AMD Ryzen 9', 9500000, 'PC / LAPTOP')">
+            <span class="item-name">Laptop Lenovo AMD Ryzen 9</span>
+            <span class="item-price">Rp. 9.500.000</span>
+          </li>
+        </ul>
+        <div class="popup-buttons">
+          <button class="popup-btn btn-simpan" onclick="closePopup('popupPCLaptop')">Simpan</button>
+          <button class="popup-btn btn-batal" onclick="closePopup('popupPCLaptop')">Batal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Aksesoris -->
+  <div id="popupAksesoris" class="popup">
+    <div class="popup-content">
+      <div class="popup-header aksesoris">
+        <span class="close" onclick="closePopup('popupAksesoris')">&times;</span>
+        <h2>AKSESORIS</h2>
+      </div>
+      <div class="popup-body">
+        <ul class="item-list">
+          <li onclick="pilihBarang('Printer Epson', 50000, 'AKSESORIS')">
+            <span class="item-name">Printer Epson</span>
+            <span class="item-price">Rp. 50.000</span>
+          </li>
+          <li onclick="pilihBarang('Hardisk Oker', 1250000, 'AKSESORIS')">
+            <span class="item-name">Hardisk Oker</span>
+            <span class="item-price">Rp. 1.250.000</span>
+          </li>
+          <li onclick="pilihBarang('Speaker Aktif', 250000, 'AKSESORIS')">
+            <span class="item-name">Speaker Aktif</span>
+            <span class="item-price">Rp. 250.000</span>
+          </li>
+        </ul>
+        <div class="popup-buttons">
+          <button class="popup-btn btn-simpan" onclick="closePopup('popupAksesoris')">Simpan</button>
+          <button class="popup-btn btn-batal" onclick="closePopup('popupAksesoris')">Batal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Surat Penjualan -->
+  <div id="popupSurat" class="popup">
+    <div class="popup-content">
+      <div class="popup-header surat">
+        <span class="close" onclick="closePopup('popupSurat')">&times;</span>
+        <h2>SURAT PENJUALAN</h2>
+      </div>
+      <div class="popup-body">
+        <ul class="item-list">
+          <li>
+            <span class="item-name">Form Surat</span>
+          </li>
+          <li>
+            <span class="item-name">Nota Penjualan</span>
+          </li>
+        </ul>
+        <div class="popup-buttons">
+          <button class="popup-btn btn-simpan" onclick="closePopup('popupSurat')">Simpan</button>
+          <button class="popup-btn btn-batal" onclick="closePopup('popupSurat')">Batal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

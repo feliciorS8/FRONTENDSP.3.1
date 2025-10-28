@@ -1,0 +1,24 @@
+<!-- Perulangan do/while akan melakukan perulangan sebanyak 1 kali terlebih
+dahulu, lalu mengecek kondisi yang ada di dalam kurung while.  Perulangan do/while akan mengecek kondisi di belakang (sesudah
+mengulang), sedangkan while akan mencek kondisi di depan atau awal (sbelum
+mengulang). -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Perulangan While</title>
+</head>
+<body>
+    <script>
+        var ulangi = confirm("Apakah anda mau mengulang?");
+        var counter = 0;
+        
+        while(ulangi){
+            counter++;
+            ulangi = confirm("Apakah anda mau mengulang?");
+        }
+        
+        document.write("Perulangan sudah dilakukan sebanyak " + counter + " kali");
+    </script>
+</body>
+</html>

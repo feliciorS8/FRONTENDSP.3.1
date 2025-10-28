@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Biaya Kirim Paket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 60%; /* Agar input sejajar */
+        }
+        #totalBiaya {
+            background-color: #e0ffe0;
+            border: 2px solid #4CAF50;
+            font-weight: bold;
+            color: #1e8449;
+        }
+        .biaya-row {
+             /* Menggantikan input dengan div untuk menampilkan hasil */
+            display: flex; 
+            justify-content: flex-end; 
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>PERHITUNGAN BIAYA KIRIM PAKET</h2>
+    
+    <form id="formKirimPaket">
+        
+        <label>
+            <span>Nomor Resi:</span>
+            <input type="text" id="nomorResi" value="RES12345" required>
+        </label>
+        
+        <label>
+            <span>Berat Barang (Kg):</span>
+            <input type="number" id="beratBarang" step="0.1" min="0.1" value="1.5" oninput="hitungTotalBiaya()" required>
+        </label>
+        
+        <label>
+            <span>Kota Asal:</span>
+            <select id="kotaAsal" onchange="hitungTotalBiaya()" required>
+                <option value="">-- Pilih Kota Asal --</option>
+            </select>
+        </label>
+        
+        <label>
+            <span>Kota Tujuan:</span>
+            <select id="kotaTujuan" onchange="hitungTotalBiaya()" required>
+                <option value="">-- Pilih Kota Tujuan --</option>
+            </select>
+        </label>
+        
+        <label>
+            <span>Total Biaya Pengiriman:</span>
+            <div class="biaya-row">
+                 <span>Rp</span>
+                 <input type="text" id="totalBiaya" value="0" readonly style="width: 55%; text-align: right;">
+            </div>
+        </label>
+        
+    </form>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

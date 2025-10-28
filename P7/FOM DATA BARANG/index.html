@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pop-up</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="openFormPopup">Tambah Data Barang</button>
+
+  <div id="formPopup" class="popup">
+    <div class="popup-content">
+      <span class="close">&times;</span>
+      <h2>Pengisian Data Barang</h2>
+      <form id="itemForm">
+        <label for="itemName">Nama Barang:</label>
+        <input type="text" id="itemName" required>
+        
+        <label for="itemPrice">Harga:</label>
+        <input type="number" id="itemPrice" required>
+        
+        <label for="itemCategory">Kategori:</label>
+        <select id="itemCategory">
+          <option value="elektronik">Elektronik</option>
+          <option value="pakaian">Pakaian</option>
+          <option value="makanan">Makanan</option>
+          <option value="perhiasan">perhiasan</option>
+        </select>
+        
+        <button type="submit">Simpan</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

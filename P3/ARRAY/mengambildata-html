@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Menambah Data Kedalam Array</title>
+</head>
+<body>
+    <script>
+        var buah = ["Apel", "Jeruk", "Manggis"];
+        
+        // Menambah data pada indeks ke-3
+        buah[3] = "Mangga";
+        
+        document.write(buah);
+    </script>
+</body>
+</html>
