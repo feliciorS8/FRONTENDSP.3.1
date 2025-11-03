@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Penjualan Komputer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>APLIKASI PENJUALAN KOMPUTER</h1>
+        <p style="margin-top: -10px; color: #555; font-size: 16px;">toko elektronik dija</p>
+    </header>
+
+    <div class="form-section">
+        <fieldset class="data-barang">
+            <legend>Data Barang</legend>
+            <div class="form-group">
+                <label for="kategori">Kategori:</label>
+                <select id="kategori">
+                    <option value="" disabled selected>Pilih Kategori</option>
+                    <option value="PC/LAPTOP">PC / LAPTOP</option>
+                    <option value="AKSESORIS">AKSESORIS</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nama-barang">Nama Barang:</label>
+                <input type="text" id="nama-barang" readonly>
+                <button id="btn-select-option">Select Option</button>
+            </div>
+            <div class="form-group">
+                <label for="harga-satuan">Harga Satuan : Rp.</label>
+                <input type="number" id="harga-satuan" readonly>
+            </div>
+            <div class="form-group">
+                <label for="jumlah">Jumlah :</label>
+                <input type="number" id="jumlah" min="1" value="1">
+            </div>
+        </fieldset>
+        
+        <fieldset class="data-perhitungan">
+            <legend>Jenis Penjualan</legend>
+            <div class="form-group">
+                <label for="jenis-penjualan">Jenis Penjualan :</label>
+                <select id="jenis-penjualan">
+                    <option value="TUNAI">TUNAI</option>
+                    <option value="KREDIT">KREDIT</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="total-penjualan">Total Penjualan : Rp.</label>
+                <input type="number" id="total-penjualan" readonly>
+            </div>
+            <div class="form-group">
+                <label for="diskon">Diskon : Rp.</label>
+                <input type="number" id="diskon" readonly>
+            </div>
+            <div class="form-group">
+                <label for="pajak">Pajak : Rp.</label>
+                <input type="number" id="pajak" readonly>
+            </div>
+            <div class="form-group total-group">
+                <label for="harga-total">Harga Total : Rp.</label>
+                <input type="number" id="harga-total" readonly>
+            </div>
+
+            <div class="action-buttons">
+                <button id="btn-hitung">Hitung</button>
+                <button id="btn-ulangi">Ulangi</button>
+            </div>
+        </fieldset>
+
+        <section class="ketentuan">
+            <h3>Ketentuan :</h3>
+            <ul>
+                <li>Diskon diberikan sebesar **10%** dari total penjualan jika penjualan dilakukan secara **transfer**.</li>
+                <li>Pajak dibebankan dengan ketentuan:
+                    <ul>
+                        <li>**15%** dari harga satuan untuk Barang Utama (PC/LAPTOP).</li>
+                        <li>**10%** dari harga satuan untuk Barang Aksesoris.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+</div>
+
+<!-- bagian pop-up  -->
+<div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        
+        <h2>Select Option</h2>
+        
+        <div id="item-options">
+            </div>
+
+        <div class="modal-actions">
+            <button id="btn-simpan-modal">Simpan</button>
+            <button id="btn-batal-modal">Batal</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
