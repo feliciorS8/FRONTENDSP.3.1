@@ -9,6 +9,11 @@ const dataBarang = {
         { nama: 'Mouse Digital - Rp. 50.000', harga: 50000 },
         { nama: 'Headset Gaming - Rp. 250.000', harga: 250000 },
         { nama: 'Speaker Aktif - Rp. 250.000', harga: 250000 }
+    ],
+
+    'MONITOR': [
+        { nama: 'Monitor LED 19 inch - Rp. 1.300.000', harga: 1300000 },
+        { nama: 'Monitor LED 21 inch - Rp. 2.500.000', harga: 2500000 }, 
     ]
 };
 
@@ -125,6 +130,8 @@ function hitungPenjualan() {
         persentasePajak = 0.15; // 15% untuk Barang Utama
     } else if (kategori === 'AKSESORIS') {
         persentasePajak = 0.10; // 10% untuk Aksesoris
+    } else if (kategori === 'MONITOR') {
+        persentasePajak = 0.12; // 12% untuk Monitor
     }
     
     const pajak = hargaSatuan * persentasePajak * jumlah; 
