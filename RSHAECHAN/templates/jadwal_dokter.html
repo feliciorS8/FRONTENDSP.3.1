@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Dokter - Medical Care Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="{{ url_for('index') }}" class="logo">Medical<span>Care</span></a>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Beranda</a></li>
+            <li><a href="{{ url_for('index') }}#poli">Layanan Poli</a></li>
+            <li><a href="{{ url_for('jadwal_dokter') }}">Jadwal Dokter</a></li>
+            <li><a href="{{ url_for('antrian') }}">Ambil Antrian</a></li>
+            <li><a href="{{ url_for('index') }}#kontak">Kontak</a></li>
+        </ul>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Jadwal Dokter Section -->
+    <section class="section" style="margin-top: 70px;">
+        <h2 class="section-title">Jadwal Praktik Dokter</h2>
+        <p class="section-subtitle">Lihat jadwal praktik dokter kami dan pilih waktu yang sesuai untuk Anda aseqq</p>
+        
+        <div class="dokter-grid">
+            {% if dokter_list %}
+                {% for dokter in dokter_list %}
+                    <div class="dokter-card">
+                        <img src="{{ url_for('static', filename='images/' + dokter.foto) }}" 
+                             alt="{{ dokter.nama_dokter }}"
+                             class="dokter-photo"
+                             onerror="this.src='https://placehold.co/400x400/1a1a1a/ffffff?text=Dokter'">
+                        <div class="dokter-info">
+                            <h3>{{ dokter.nama_dokter }}</h3>
+                            <span class="spesialisasi">{{ dokter.spesialisasi }}</span>
+                            <p style="color: #666; margin-bottom: 15px;">
+                                <i class="fas fa-hospital"></i> {{ dokter.nama_poli }}
+                            </p>
+                            
+                            {% if dokter.jadwal %}
+                                <h4 style="margin-bottom: 10px; color: #1a1a1a;">Jadwal Praktik:</h4>
+                                {% for jadwal in dokter.jadwal %}
+                                    <div class="jadwal-item">
+                                        <span class="hari">{{ jadwal.hari }}</span>
+                                        <span class="jam">
+                                            {{ jadwal.jam_mulai[:5] }} - {{ jadwal.jam_selesai[:5] }}
+                                        </span>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p style="color: #999; font-style: italic;">Jadwal belum tersedia</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666;">
+                    <i class="fas fa-info-circle" style="font-size: 48px; margin-bottom: 20px; color: #ccc;"></i>
+                    <p>Belum ada data jadwal dokter tersedia.</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="background: #f8f9fa;">
+        <h2 class="section-title">Siap Berkonsultasi?</h2>
+        <p class="section-subtitle">Ambil nomor antrian online untuk konsultasi dengan dokter pilihan Anda</p>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{{ url_for('antrian') }}" class="btn-primary" style="display: inline-block; text-decoration: none;">
+                <i class="fas fa-calendar-check"></i> Ambil Nomor Antrian
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Medical Care Center</h3>
+                <p>Rumah sakit dengan pelayanan kesehatan terbaik dan tenaga medis profesional yang siap melayani Anda 24 jam setiap hari.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Layanan</h3>
+                <a href="{{ url_for('index') }}#poli">Poli Umum</a><br>
+                <a href="{{ url_for('index') }}#poli">Poli Gigi</a><br>
+                <a href="{{ url_for('index') }}#poli">Poli Dalam</a><br>
+                <a href="{{ url_for('jadwal_dokter') }}">Jadwal Dokter</a><br>
+                <a href="{{ url_for('antrian') }}">Pendaftaran Online</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Hubungi Kami</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jl. Kesehatan No. 123, Jakarta Pusat, DKI Jakarta 10110</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(021) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@medicalcare.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Buka 24 Jam</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Medical Care Center. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

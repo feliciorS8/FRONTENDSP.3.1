@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medical Care Center - Rumah Sakit Terpercaya</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <a href="{{ url_for('index') }}" class="logo">
+        Medical<span>Care</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="{{ url_for('index') }}">Beranda</a></li>
+        <li><a href="#poli">Layanan Poli</a></li>
+        <li><a href="{{ url_for('jadwal_dokter') }}">Jadwal Dokter</a></li>
+        <li><a href="{{ url_for('antrian') }}">Ambil Antrian</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+
+      <div class="auth-links">
+        <a href="{{ url_for('admin_login') }}" class="login-btn">
+          <i class="fas fa-user-shield"></i> Admin
+        </a>
+      </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %} {% endif %} {% endwith %}
+
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+      {% if sliders %} {% for slider in sliders %}
+      <div class="slide {% if loop.first %}active{% endif %}">
+        <img
+          src="{{ url_for('static', filename='images/' + slider.gambar) }}"
+          alt="{{ slider.judul }}"
+          onerror="this.src='https://placehold.co/1920x500/1a1a1a/ffffff?text={{ slider.judul }}'"
+        />
+        <div class="slide-content">
+          <h1>{{ slider.judul }}</h1>
+          <p>{{ slider.deskripsi }}</p>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <div class="slide active">
+        <img
+          src="https://placehold.co/1920x500/1a1a1a/ffffff?text=Medical+Care+Center"
+          alt="Medical Care"
+        />
+        <div class="slide-content">
+          <h1>Selamat Datang di Medical Care Center</h1>
+          <p>
+            Rumah sakit terpercaya dengan pelayanan kesehatan terbaik untuk
+            keluarga Anda
+          </p>
+        </div>
+      </div>
+      <div class="slide">
+        <img
+          src="https://placehold.co/1920x500/2c7be5/ffffff?text=Fasilitas+Modern"
+          alt="Fasilitas"
+        />
+        <div class="slide-content">
+          <h1>Fasilitas Medis Modern</h1>
+          <p>
+            Dilengkapi dengan peralatan medis canggih dan tenaga medis
+            profesional
+          </p>
+        </div>
+      </div>
+      <div class="slide">
+        <img
+          src="https://placehold.co/1920x500/1a5dc4/ffffff?text=Layanan+24+Jam"
+          alt="Layanan 24 Jam"
+        />
+        <div class="slide-content">
+          <h1>Layanan 24 Jam</h1>
+          <p>Siap melayani kebutuhan kesehatan Anda setiap saat</p>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="slider-nav">
+        <span class="slider-dot active" onclick="currentSlide(0)"></span>
+        <span class="slider-dot" onclick="currentSlide(1)"></span>
+        <span class="slider-dot" onclick="currentSlide(2)"></span>
+      </div>
+    </section>
+
+    <!-- Layanan Poli Section -->
+    <section class="section" id="poli">
+      <h2 class="section-title">Layanan Poli Kami</h2>
+      <p class="section-subtitle">
+        Berbagai layanan kesehatan profesional untuk kebutuhan Anda
+      </p>
+
+      <div class="poli-grid">
+        {% if poli_list %} {% for poli in poli_list %}
+        <div class="poli-card">
+          <div class="poli-icon">
+            <i class="fas {{ poli.icon }}"></i>
+          </div>
+          <h3>{{ poli.nama_poli }}</h3>
+          <p>{{ poli.deskripsi }}</p>
+        </div>
+        {% endfor %} {% else %}
+        <div class="poli-card">
+          <div class="poli-icon"><i class="fas fa-user-doctor"></i></div>
+          <h3>Poli Umum</h3>
+          <p>Pelayanan kesehatan umum untuk berbagai keluhan</p>
+        </div>
+        <div class="poli-card">
+          <div class="poli-icon"><i class="fas fa-tooth"></i></div>
+          <h3>Poli Gigi</h3>
+          <p>Pelayanan kesehatan gigi dan mulut</p>
+        </div>
+        <div class="poli-card">
+          <div class="poli-icon"><i class="fas fa-heart-pulse"></i></div>
+          <h3>Poli Dalam</h3>
+          <p>Spesialis penyakit dalam</p>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section" style="background: #f8f9fa">
+      <h2 class="section-title">Butuh Perawatan Medis?</h2>
+      <p class="section-subtitle">
+        Ambil nomor antrian online sekarang dan hindari antrian panjang
+      </p>
+      <div style="text-align: center; margin-top: 30px">
+        <a
+          href="{{ url_for('antrian') }}"
+          class="btn-primary"
+          style="display: inline-block; text-decoration: none"
+        >
+          <i class="fas fa-calendar-check"></i> Ambil Nomor Antrian
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Medical Care Center</h3>
+          <p>
+            Rumah sakit dengan pelayanan kesehatan terbaik dan tenaga medis
+            profesional yang siap melayani Anda 24 jam setiap hari.
+          </p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Layanan</h3>
+          <a href="#poli">Poli Umum</a><br />
+          <a href="#poli">Poli Gigi</a><br />
+          <a href="#poli">Poli Dalam</a><br />
+          <a href="{{ url_for('jadwal_dokter') }}">Jadwal Dokter</a><br />
+          <a href="{{ url_for('antrian') }}">Pendaftaran Online</a>
+        </div>
+
+        <div class="footer-section">
+          <h3>Hubungi Kami</h3>
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span
+                >Jl. Kesehatan No. 123, Jakarta Pusat, DKI Jakarta 10110</span
+              >
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>(021) 123-4567</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info@medicalcare.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-clock"></i>
+              <span>Buka 24 Jam</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Medical Care Center. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Navbar scroll effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Slider functionality
+      let slideIndex = 0;
+      const slides = document.querySelectorAll(".slide");
+      const dots = document.querySelectorAll(".slider-dot");
+
+      function showSlide(n) {
+        slides.forEach((slide) => slide.classList.remove("active"));
+        dots.forEach((dot) => dot.classList.remove("active"));
+
+        slideIndex = n;
+        if (slideIndex >= slides.length) slideIndex = 0;
+        if (slideIndex < 0) slideIndex = slides.length - 1;
+
+        slides[slideIndex].classList.add("active");
+        dots[slideIndex].classList.add("active");
+      }
+
+      function currentSlide(n) {
+        showSlide(n);
+      }
+
+      function nextSlide() {
+        showSlide(slideIndex + 1);
+      }
+
+      // Auto slide
+      setInterval(nextSlide, 5000);
+    </script>
+  </body>
+</html>
